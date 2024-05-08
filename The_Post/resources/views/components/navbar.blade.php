@@ -9,9 +9,32 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+          @Auth
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Benvenut* {{Auth::user()->name}}
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item">
+                <form action="{{route('logout')}}" id="logout-form" method="POST">
+                  @csrf
+                  <button type="submit" class="btn nav-link">Logout</button>
+                </form>
+              </li>
+            </ul>
           </li>
+          @endauth
+          @guest
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Benvenuto Ospite
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="{{route('register')}}" class="dropdown-item">Registrati</a></li>
+              <li><a href="{{route('login')}}" class="dropdown-item">Accedi</a></li>
+            </ul>
+          </li>
+          @endguest
           </ul>
       </div>
     </div>
