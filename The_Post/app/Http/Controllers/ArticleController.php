@@ -36,24 +36,23 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'=>'required|unique:articles|min:5',
-            'subtitle'=>'required|min:5',
-            'body'=>'required|min:10',
-            'image'=>'image|required',
-            'category'=>'required',
+            'title' => 'required|unique:articles|min:5',
+            'subtitle' => 'required|min:5',
+            'body' => 'required|min:10',
+            'image' => 'image|required',
+            'category' => 'required',
         ]);
 
         $article = Article::create([
-            'title'=>$request->title,
-            'subtitle'=>$request->subtitle,
-            'body'=>$request->body,
-            'image'=>$request->file('image')->store('public/image'),
-            'category_id'=>$request->category,
-            'user_id'=>Auth::user()->id,
+            'title' => $request->title,
+            'subtitle' => $request->subtitle,
+            'body' => $request->body,
+            'image' => $request->file('image')->store('public/image'),
+            'category_id' => $request->category,
+            'user_id' => Auth::user()->id,
         ]);
 
         return redirect(route('homepage'))->with('message', 'Articolo creato correttamnete');
-
     }
 
     /**
