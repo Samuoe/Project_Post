@@ -15,7 +15,12 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
-          @Auth
+          @auth
+          @if (Auth::user()->is_admin)
+          <li>
+            <a class="nav-link" href="{{route('admin.dashboard')}}">Dashboard Admin</a>
+          </li>
+          @endif
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Benvenut* {{Auth::user()->name}}
