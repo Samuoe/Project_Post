@@ -22,6 +22,9 @@ Route::get('/careers', [PublicController::class, 'careers'])->name('careers');
 
 Route::post('/careers/submit', [PublicController::class, 'careersSubmit'])->name('careers.submit');
 
+Route::get('/article/seach',[ArticleController::class,'articleSearch'])->name('article.search');
+
+
 Route::middleware('admin')->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::patch('/admin/{user}/set-admin', [AdminController::class, 'setAdmin'])->name('admin.setAdmin');
@@ -40,4 +43,5 @@ Route::middleware('revisor')->group(function () {
 Route::middleware('writer')->group(function () {
     Route::get('/articles/create', [ArticleController::class, 'create'])->name('article.create');
     Route::post('/articles/store', [ArticleController::class, 'store'])->name('article.store');
+
 });
