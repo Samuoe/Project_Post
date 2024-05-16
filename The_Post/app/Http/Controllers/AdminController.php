@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     public function dashboard(){
-        $adminRequests = User::where('is_admin',Null)->get();
-        $revisorRequests = User::where('is_revisor',Null)->get();
-        $writerRequests = User::where('is_writer',Null)->get();
+        $adminRequests = User::where('is_admin',NULL)->get();
+        $revisorRequests = User::where('is_revisor',NULL)->get();
+        $writerRequests = User::where('is_writer',NULL)->get();
 
         return view('admin.dashboard', compact('adminRequests','revisorRequests','writerRequests'));
 
@@ -20,7 +20,7 @@ class AdminController extends Controller
         $user->is_admin=true;
         $user->save();
 
-        return redirect(route('admin.dashboard'))->whith('message', 'Hai correttamente reso amministratore l\'utente scelto');
+        return redirect(route('admin.dashboard'))->with('message', 'Hai correttamente reso amministratore l\'utente scelto');
 
 
     }
@@ -29,7 +29,7 @@ class AdminController extends Controller
         $user->is_revisor=true;
         $user->save();
 
-        return redirect(route('admin.dashboard'))->whith('message', 'Hai correttamente reso revisore l\'utente scelto');
+        return redirect(route('admin.dashboard'))->with('message', 'Hai correttamente reso revisore l\'utente scelto');
 
 
     }
@@ -38,7 +38,7 @@ class AdminController extends Controller
         $user->is_writer=true;
         $user->save();
 
-        return redirect(route('admin.dashboard'))->whith('message', 'Hai correttamente reso redattore l\'utente scelto');
+        return redirect(route('admin.dashboard'))->with('message', 'Hai correttamente reso redattore l\'utente scelto');
 
 
     }
