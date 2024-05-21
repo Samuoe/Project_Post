@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -67,6 +68,21 @@ class ArticleController extends Controller
             'category_id' => $request->category,
             'user_id' => Auth::user()->id,
         ]);
+
+        $tags = explode(',' , $request->tags);
+
+        foreach($tags as $i => $tag){
+            $tags[$i] = trim($tag);
+        }
+
+        foreach($tags as $tag){
+            $newTag = Tag::updateOrCreate(
+                ['name'=> $tag],
+                ['name'=> strtolower($tag)],
+            );
+            $article->tags()->attach($newTag);
+        }
+
 
         return redirect(route('homepage'))->with('message', 'Articolo creato correttamnete');
     }
