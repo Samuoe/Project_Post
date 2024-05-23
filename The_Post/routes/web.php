@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\WriterController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\RevisorController;
 
 Route::get('/', [PublicController::class, 'homepage'])->name('homepage');
@@ -48,5 +49,6 @@ Route::middleware('revisor')->group(function () {
 Route::middleware('writer')->group(function () {
     Route::get('/articles/create', [ArticleController::class, 'create'])->name('article.create');
     Route::post('/articles/store', [ArticleController::class, 'store'])->name('article.store');
+    Route::get('/writer/dashboard',[WriterController::class, 'dashoboard'])->name('writer.dashboard');
 
 });
