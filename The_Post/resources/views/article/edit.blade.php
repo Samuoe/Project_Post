@@ -58,7 +58,7 @@
                     </div>
 
                     <div class="md-2 d-flex justify-content-center">
-                        <button type="submit" class="btn btn-info text-white">Inserisci articolo</button>
+                        <button type="submit" class="btn btn-info text-white">Modifica l'articolo</button>
                     </div>
 
 

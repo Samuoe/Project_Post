@@ -108,6 +108,7 @@ class ArticleController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Article $article)
+
     {
         $request->validate([
             'title' => 'required|min:5|unique:articles,title,'.$article->id,
@@ -122,6 +123,7 @@ class ArticleController extends Controller
             'subtitle' => $request->subtitle,
             'body' => $request->body,
             'category_id' => $request->category,
+            'is_accepted' => NULL,
         ]);
 
         if($request->image){

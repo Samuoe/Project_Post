@@ -7,16 +7,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li>
-                    <a class="nav-link" href="{{ route('article.create') }}">Inserisci un articolo</a>
-                </li>
+
                 <li>
                     <a class="nav-link" href="{{ route('article.index') }}">Tutti gli articoli</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
                 @auth
+                    <li>
+                        <a class="nav-link" href="{{ route('article.create') }}">Inserisci un articolo</a>
+                    </li>
                     @if (Auth::user()->is_admin)
                         <li>
                             <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard Admin</a>
@@ -28,10 +26,10 @@
                         </li>
                     @endif
                     @if (Auth::user()->is_writer)
-                    <li>
-                        <a class="nav-link" href="{{ route('writer.dashboard') }}">Dashboard del redattore</a>
-                    </li>
-                @endif
+                        <li>
+                            <a class="nav-link" href="{{ route('writer.dashboard') }}">Dashboard del redattore</a>
+                        </li>
+                    @endif
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
@@ -39,10 +37,14 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li class="nav-item">
+
                                 <form action="{{ route('logout') }}" id="logout-form" method="POST">
                                     @csrf
                                     <button type="submit" class="btn nav-link">Logout</button>
                                 </form>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('careers') }}">Lavora con noi</a>
                             </li>
                         </ul>
                     </li>
@@ -60,8 +62,9 @@
                     </li>
                 @endguest
             </ul>
-            <form class="d-flex" action="{{route('article.search')}}" method="GET">
-                <input  class="form-control me-2" type="search" placeholder="Cosa stai cercando?" aria-label="Search" name="query">
+            <form class="d-flex" action="{{ route('article.search') }}" method="GET">
+                <input class="form-control me-2" type="search" placeholder="Cosa stai cercando?" aria-label="Search"
+                    name="query">
                 <button class="btn btn-outline-info" type="submit">Cerca</button>
             </form>
         </div>
