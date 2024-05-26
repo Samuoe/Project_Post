@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tag;
+use App\Models\User;
 use App\Models\Article;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -40,6 +42,11 @@ class ArticleController extends Controller
 
     }
 
+    public function byWriter(User $user){
+        $articles = $user->articles()->where('is_accepted', true)->orderBy('created_at', 'desc')->get();
+        return view('article.by-writer', compact('user', 'articles'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -68,6 +75,7 @@ class ArticleController extends Controller
             'image' => $request->file('image')->store('public/image'),
             'category_id' => $request->category,
             'user_id' => Auth::user()->id,
+            'slug'=> Str::slug($request->title),
         ]);
 
         $tags = explode(',' , $request->tags);
@@ -124,6 +132,7 @@ class ArticleController extends Controller
             'body' => $request->body,
             'category_id' => $request->category,
             'is_accepted' => NULL,
+            'slug'=> Str::slug($request->title),
         ]);
 
         if($request->image){

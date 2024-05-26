@@ -15,7 +15,7 @@ Route::post('/articles/store', [ArticleController::class, 'store'])->name('artic
 
 Route::get('/articles/index', [ArticleController::class, 'index'])->name('article.index');
 
-Route::get('/articles/show/{article}', [ArticleController::class, 'show'])->name('article.show');
+Route::get('/article/show/{article:slug}', [ArticleController::class, 'show'])->name('article.show');
 
 Route::get('/articles/show/{category}', [ArticleController::class, 'byCategory'])->name('article.byCategory');
 
@@ -24,6 +24,8 @@ Route::get('/careers', [PublicController::class, 'careers'])->name('careers');
 Route::post('/careers/submit', [PublicController::class, 'careersSubmit'])->name('careers.submit');
 
 Route::get('/article/seach',[ArticleController::class,'articleSearch'])->name('article.search');
+
+Route::get('/article/writer/{user}', [ArticleController::class, 'byWriter'])->name('article.byWriter');
 
 
 Route::middleware('admin')->group(function () {
